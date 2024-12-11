@@ -9,6 +9,15 @@ const getalltrucks = async (req, res) => {
         res.status(500).json({ status: 500, error: error.message })
     }
 }
+const getTruckById = async (req, res) => {
+    const { id } = req.params
+    try {
+        const findTruck = await truckModel.getTruckById(id)
+        res.status(200).json(findTruck)
+    } catch (error) {
+        res.status(500).json({ status: 500, error: error.message })
+    }
+}
 
 const addtruck = async (req, res) => {
     const errors = validationResult(req); 
@@ -50,4 +59,4 @@ const deleteTruckById = async (req, res) => {
     }
 }
 
-export { getalltrucks, addtruck, updateTruckById, deleteTruckById }
+export { getalltrucks,getTruckById, addtruck, updateTruckById, deleteTruckById }
