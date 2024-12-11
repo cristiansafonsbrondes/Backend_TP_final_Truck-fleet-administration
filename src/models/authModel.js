@@ -1,9 +1,6 @@
 import mongoose from "mongoose";
 import bcryptjs from "bcrypt";
 
-
-
-
 const userSchema = new mongoose.Schema({
     username: { type: String, required: true, unique: true, trim: true, minlength: 5,
         maxlength: 20, match: /^[a-zA-Z0-9_]+$/}, // Solo alfanuméricos y guiones bajos
@@ -22,7 +19,7 @@ const register = async (dataUser) => {
             return null;
         }
         // Hasheamos la contraseña
-        const hashedPassword = await bcrypt.hash(password, 10)
+        const hashedPassword = await bcryptjs.hash(password, 10)
         // Creamos un nuevo usuario con la contraseña hasheada
         const newUser = new User({
             username,

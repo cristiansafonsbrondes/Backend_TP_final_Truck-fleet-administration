@@ -31,7 +31,7 @@ const addTruck = async (dataTruck) => {
 
 const updateTruckById = async (id, updatedData) => {
     try {
-        const option = {new: true}
+            const option = {new: true}
         const updatedTruck = await truck.findByIdAndUpdate(id, updatedData ,option)
         return updatedTruck
     } catch (error) {

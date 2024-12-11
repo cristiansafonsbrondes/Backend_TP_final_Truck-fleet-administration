@@ -4,7 +4,7 @@ process.loadEnvFile()
 const JWT_SECRET = process.env.JWT_SECRET
 
 const auth = (req, res, next) => {
-    const token = req.headers.autorization?.split(" ")(1);
+    const token = req.headers.authorization?.split(" ")[1];
 
     if (!token) {
         return res.status (401).json({message: "Acces denied. No token provided."})
@@ -20,3 +20,4 @@ const auth = (req, res, next) => {
 }
 
 export { auth }
+

@@ -1,4 +1,5 @@
 import truckModel from "../models/truckModel.js"
+import { validationResult } from "express-validator"
 
 const getalltrucks = async (req, res) => {
     try {
@@ -10,6 +11,11 @@ const getalltrucks = async (req, res) => {
 }
 
 const addtruck = async (req, res) => {
+    const errors = validationResult(req); 
+    if (!errors.isEmpty()) { 
+        return res.status(400).json({ errors: errors.array() }); 
+    }
+
     const { vin, truckNumber, make, model, year } = req.body
     try {
         const newTruck = await truckModel.addTruck({ vin, truckNumber, make, model, year })
@@ -20,6 +26,11 @@ const addtruck = async (req, res) => {
 }
 
 const updateTruckById = async (req, res) => {
+    const errors = validationResult(req); 
+    if (!errors.isEmpty()) { 
+            return res.status(400).json({ errors: errors.array() }); 
+    }
+
     const { id } = req.params
     const { vin, truckNumber, make, model, year } = req.body
     try {
